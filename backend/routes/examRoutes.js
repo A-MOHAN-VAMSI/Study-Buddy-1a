@@ -1,8 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { createExam } = require("../controllers/examController");
+const {
+    createExam,
+    getAllExams
+} = require("../controllers/examController");
+
 const verifyToken = require("../middleware/authMiddleware");
+
+router.get("/", getAllExams);
 
 router.post("/", verifyToken, createExam);
 

@@ -1,7 +1,6 @@
 const examService = require("../services/examService");
 
 const createExam = async (req, res) => {
-
     try {
 
         const result = await examService.createExam(req.body);
@@ -19,9 +18,31 @@ const createExam = async (req, res) => {
         });
 
     }
+};
+
+const getAllExams = async (req, res) => {
+
+    try {
+
+        const exams = await examService.getAllExams();
+
+        res.json({
+            success: true,
+            exams
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
 
 };
 
 module.exports = {
-    createExam
+    createExam,
+    getAllExams
 };
