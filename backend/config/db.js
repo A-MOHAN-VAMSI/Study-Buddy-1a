@@ -14,10 +14,29 @@ const pool = mysql.createPool({
 (async () => {
     try {
         const connection = await pool.getConnection();
-        console.log("✅ Database Connected Successfully");
+
+        console.log("✅ USING THIS DB CONFIG");
+
+        const [host] = await connection.query("SELECT @@hostname AS host");
+        console.log("HOST:", host);
+
+        const [port] = await connection.query("SELECT @@port AS port");
+        console.log("PORT:", port);
+
+        const [db] = await connection.query("SELECT DATABASE() AS db");
+        console.log("DATABASE:", db);
+
+        const [tables] = await connection.query("SHOW TABLES");
+        console.log("TABLES:", tables);
+
+        const [count] = await connection.query(
+            "SELECT COUNT(*) AS total FROM users"
+        );
+        console.log("COUNT:", count);
+
         connection.release();
-    } catch (error) {
-        console.error(error.message);
+    } catch (err) {
+        console.error(err);
     }
 })();
 
