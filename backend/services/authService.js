@@ -4,7 +4,9 @@ const db = require("../config/db");
 
 // Register User
 const register = async (userData) => {
-    const { name, email, password, role } = userData;
+    const { name, email, password } = userData;
+
+const role = "student";
 
     const [existingUser] = await db.query(
         "SELECT * FROM users WHERE email = ?",

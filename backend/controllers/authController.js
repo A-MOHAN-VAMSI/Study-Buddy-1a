@@ -8,11 +8,13 @@ const registerUser = async (req, res) => {
             ...result
         });
     } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message
-        });
-    }
+    console.error(error);
+
+    res.status(500).json({
+        success: false,
+        message: error.message || "Internal Server Error"
+    });
+}
 };
 const loginUser = async (req, res) => {
     try {
@@ -25,13 +27,13 @@ const loginUser = async (req, res) => {
         });
 
     } catch (error) {
+    console.error(error);
 
-        res.status(400).json({
-            success: false,
-            message: error.message
-        });
-
-    }
+    res.status(500).json({
+        success: false,
+        message: error.message || "Internal Server Error"
+    });
+}
 };
 module.exports = {
     registerUser,
