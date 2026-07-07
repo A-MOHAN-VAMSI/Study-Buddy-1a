@@ -1,9 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
-const { createQuestion } = require("../controllers/questionController");
-const verifyToken = require("../middleware/authMiddleware");
+const {
+  createQuestion,
+  getAllQuestions,
+  deleteQuestion,
+  updateQuestion,
+} = require("../controllers/questionController");
 
-router.post("/", verifyToken, createQuestion);
+router.get("/", getAllQuestions);
+
+router.post("/", createQuestion);
+
+router.delete("/:id", deleteQuestion);
+
+router.put("/:id", updateQuestion);
 
 module.exports = router;

@@ -1,19 +1,33 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+
 const db = require("./config/db");
+
 const app = express();
+
 const authRoutes = require("./routes/authRoutes");
 const examRoutes = require("./routes/examRoutes");
-const verifyToken = require("./middleware/authMiddleware");
 const questionRoutes = require("./routes/questionRoutes");
 const studentRoutes = require("./routes/studentRoutes");
-app.use(cors());
+const adminRoutes = require("./routes/adminRoutes");
+const verifyToken = require("./middleware/authMiddleware");
+
+// ✅ CORS FIRST
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
+
+// ✅ JSON SECOND
 app.use(express.json());
+
+// ✅ THEN ALL ROUTES
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/questions", questionRoutes);
-app.use("/api/student", studentRoutes);
+app.use("/api/students", studentRoutes);
 // Test Route
 app.get("/", (req, res) => {
   res.json({
