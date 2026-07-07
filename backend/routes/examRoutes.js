@@ -2,14 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    createExam,
-    getAllExams
+  createExam,
+  getAllExams,
+  deleteExam,
+  updateExam,
 } = require("../controllers/examController");
-
 const verifyToken = require("../middleware/authMiddleware");
 
 router.get("/", getAllExams);
 
-router.post("/", verifyToken, createExam);
+router.post("/", createExam);
+
+router.delete("/:id", deleteExam);
+
+router.put("/:id", updateExam);
 
 module.exports = router;

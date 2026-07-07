@@ -1,15 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const verifyToken = require("../middleware/authMiddleware");
 const {
-    getAllExams,
-    startExam,
-    submitExam
+  getAllStudents,
+  deleteStudent,
 } = require("../controllers/studentController");
 
-router.get("/exams", verifyToken, getAllExams);
-router.get("/exam/:id", verifyToken, startExam);
-router.post("/submit", verifyToken, submitExam);
+router.get("/", getAllStudents);
+
+router.delete("/:id", deleteStudent);
 
 module.exports = router;

@@ -1,76 +1,40 @@
 const studentService = require("../services/studentService");
 
-const getAllExams = async (req, res) => {
-    try {
-        const exams = await studentService.getAllExams();
+// Get Students
+const getAllStudents = async (req, res) => {
+  try {
+    const students = await studentService.getAllStudents();
 
-        res.json({
-            success: true,
-            exams
-        });
-
-    } catch (error) {
-
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
-
-    }
+    res.json({
+      success: true,
+      students,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 };
-const startExam = async (req, res) => {
 
-    try {
+// Delete Student
+const deleteStudent = async (req, res) => {
+  try {
+    await studentService.deleteStudent(req.params.id);
 
-        const examId = req.params.id;
-
-        const questions = await studentService.startExam(examId);
-
-        res.json({
-            success: true,
-            questions
-        });
-
-    } catch (error) {
-
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
-
-    }
-};
-const submitExam = async (req, res) => {
-
-    try {
-
-        const studentId = req.user.id;
-        const { exam_id, answers } = req.body;
-
-        const result = await studentService.submitExam(
-            studentId,
-            exam_id,
-            answers
-        );
-
-        res.json({
-            success: true,
-            message: "Exam Submitted Successfully",
-            result
-        });
-
-    } catch (error) {
-
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
-
-    }
+    res.json({
+      success: true,
+      message: "Student Deleted",
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 };
 
 module.exports = {
-    getAllExams,
-    startExam,
-    submitExam
+  getAllStudents,
+  deleteStudent,
 };
