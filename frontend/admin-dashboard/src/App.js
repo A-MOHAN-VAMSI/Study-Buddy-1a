@@ -4,6 +4,7 @@ import AdminHome from './pages/admin/AdminHome'
 import ManageExams from './pages/admin/ManageExams'
 import QuestionBank from './pages/admin/QuestionBank'
 import ManageStudents from './pages/admin/ManageStudents'
+import Analytics from './pages/admin/Analytics'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/admin/exams" element={<ManageExams />} />
             <Route path="/admin/questions" element={<QuestionBank />} />
              <Route path="/admin/students" element={<ManageStudents />} />
+             <Route path="/admin/analytics/:examId" element={<Analytics />} />
           </Routes>
         </div>
       </div>

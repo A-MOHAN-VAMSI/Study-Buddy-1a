@@ -8,12 +8,14 @@ const examRoutes = require("./routes/examRoutes");
 const verifyToken = require("./middleware/authMiddleware");
 const questionRoutes = require("./routes/questionRoutes");
 const studentRoutes = require("./routes/studentRoutes");
+const resultRoutes = require("./routes/resultRoutes");
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/student", studentRoutes);
+app.use("/api/results", resultRoutes);
 // Test Route
 app.get("/", (req, res) => {
   res.json({

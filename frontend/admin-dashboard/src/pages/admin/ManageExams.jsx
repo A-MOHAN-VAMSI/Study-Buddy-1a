@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom'
+
 function ManageExams() {
+  const navigate = useNavigate()
+
   const exams = [
-    { name: 'Math Test', subject: 'Mathematics', duration: '60 mins' },
-    { name: 'Science Quiz', subject: 'Science', duration: '45 mins' },
-    { name: 'English Test', subject: 'English', duration: '30 mins' },
+    { id: 1, name: 'Math Test', subject: 'Mathematics', duration: '60 mins' },
+    { id: 2, name: 'Science Quiz', subject: 'Science', duration: '45 mins' },
+    { id: 3, name: 'English Test', subject: 'English', duration: '30 mins' },
   ]
 
   return (
@@ -35,6 +39,12 @@ function ManageExams() {
                 <td style={{ padding: '16px', display: 'flex', gap: '8px' }}>
                   <button style={{ backgroundColor: '#eff6ff', color: '#3b82f6', border: 'none', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer', fontWeight: '500' }}>Edit</button>
                   <button style={{ backgroundColor: '#fef2f2', color: '#ef4444', border: 'none', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer', fontWeight: '500' }}>Delete</button>
+                  <button
+                    onClick={() => navigate(`/admin/analytics/${exam.id}`)}
+                    style={{ backgroundColor: '#f0fdf4', color: '#16a34a', border: 'none', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer', fontWeight: '500' }}
+                  >
+                    📊 Analytics
+                  </button>
                 </td>
               </tr>
             ))}
